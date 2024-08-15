@@ -1,64 +1,42 @@
 # Data2Day Workshop - Bring your own Data: Hands-on Enterprise AI Assistants in der Cloud
 
-tbd
+Herzlich Willkommen zum Workshop!
 
+In den nächsten Stunden werden wir Schritt für Schritt eine eigene Retrieval-Augmented Generation-Anwendung (RAG) entwickeln.
+Dabei werden wir nicht nur die Anwendung gemeinsam aufbauen, sondern auch ihre Leistungsfähigkeit evaluieren.
+Ein besonderes Augenmerk legen wir auf die Integration Ihrer persönlichen Daten, um das System präzise auf Ihre spezifischen Fragestellungen anzupassen und individuelle Antworten zu generieren.
+
+Alle im Workshop verwendeten Code-Beispiele finden Sie in diesem Repository. Es dient als Basis, um die erworbenen Kenntnisse auch nach dem Workshop anzuwenden und weiter zu vertiefen.
 ## Getting started
 
 ### Setup Development-Environment
+1. Erstelle eine virtuelle Entwicklungsumgebung
 
-tbd
+```bash
+python3 -m venv name_of_virtualenv
+source name_of_virtualenv/bin/activate
+```
 
-### Get Azure Credentials
+2. Installiere die benötigten Python-Pakete
 
-tbd
-
-### Build your (first) Chatbot-App
-
-tbd
-
-### Setup Development-Environment
-
-tbd
+```bash
+pip install -r requirements.txt
+```
 
 ### Get Azure Credentials
 
-tbd
+Die benötigten Zugangsdaten zu unserer Azure Instanz findest du in XY
 
-### Build your (first) Chatbot-App
+## Build your (first) Chatbot-App
 
-tbd
+In [Sprint 1](sprint_1/README.md) werden wir eine 
 
-### Setup Development-Environment
-
-tbd
-
-### Get Azure Credentials
-
-tbd
-
-### Build your (first) Chatbot-App
-
-tbd
-
-## Retrieval: add Data to your App
-
-### Parse Documents
-
-tbd
-
-### Create a Vectordatabase
-
-tbd
-
-### Connect your App to your Data
+## Connect your App to the Data
 
 tbd
 
 ## Evaluation
 
-### tbd
-
-tbd
 
 ## Add your Own Data
 
