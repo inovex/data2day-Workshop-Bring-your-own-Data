@@ -1,0 +1,15 @@
+.idea
+venv
+
+# byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# local env file
+*.env
+
+# jupyter checkpoints
+*.ipynb_checkpoints/
+
+# Mac DS_Store 
+.DS_Store
