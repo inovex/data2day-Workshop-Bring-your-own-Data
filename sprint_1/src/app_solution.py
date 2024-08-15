@@ -12,30 +12,6 @@ load_dotenv()
 
 @cl.on_chat_start
 async def on_chat_start():
-    settings = await cl.ChatSettings(
-        [
-            cl.input_widget.Slider(
-                id="max_tokens",
-                initial=4000,
-                label="OpenAI - Max Tokens",
-                min=1,
-                max=4096,
-                step=1,
-            ),
-            cl.input_widget.Slider(
-                id="temperature",
-                initial=1,
-                label="OpenAI - Temperature",
-                min=0,
-                max=2,
-                step=0.1,
-            ),
-        ]
-    ).send()
-
-    # store setting in user session
-    cl.user_session.set("settings", settings)
-
     # send welcome message
     await cl.Message(
         content="Hallo, wie kann ich dir helfen? :)", author="Chatbot"
@@ -48,8 +24,7 @@ async def on_chat_start():
         api_key=os.getenv("AZURE_OPENAI_API_KEY"),
         api_version=os.getenv("AZURE_OPENAI_VERSION"),
         openai_api_type="azure",
-        temperature=settings["temperature"],
-        max_tokens=settings["max_tokens"],
+        temperature=0.0,
         streaming=True,
     )
 

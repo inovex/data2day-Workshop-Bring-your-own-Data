@@ -1,8 +1,13 @@
+import os
+
 import chainlit as cl
+from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema import StrOutputParser
 from langchain.schema.runnable.config import RunnableConfig
 from langchain_openai import AzureChatOpenAI
+
+load_dotenv()
 
 
 @cl.on_settings_update
@@ -12,15 +17,12 @@ async def setup_chain(chat_settings):
         await cl.Message(content=settings_message).send()
     cl.user_session.set("count", 1)
 
-    # get the environment variables from the user session
-    user_env = cl.user_session.get("env")
-
     # initialize the Azure OpenAI Model
     model = AzureChatOpenAI(
-        azure_endpoint=user_env["AZURE_OPENAI_ENDPOINT"],
-        deployment_name=user_env["AZURE_OPENAI_DEPLOYMENT"],
-        api_key=user_env["AZURE_OPENAI_API_KEY"],
-        api_version=user_env["AZURE_OPENAI_VERSION"],
+        azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+        deployment_name=os.getenv("AZURE_OPENAI_DEPLOYMENT"),
+        api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+        api_version=os.getenv("AZURE_OPENAI_VERSION"),
         openai_api_type="azure",
         temperature=0.0,
         max_tokens=chat_settings["max_tokens"],
