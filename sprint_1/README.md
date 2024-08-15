@@ -3,9 +3,9 @@ In dieser ersten Übung legen wir das Fundament für eine RAG-Anwendung, auf dem
 
 Hier sind die erforderlichen Schritte, um mit der Entwicklung loszulegen:
 - **Gitlab Repository klonen**: Klone das Gitlab Repository zur Übung mit dem folgenden Befehl in einen Ordner deiner Wahl
-```git clone https://gitlab.inovex.de/jheinz2/data2day-rag-workshop.git```
+```git clone https://github.com/inovex/data2day-Workshop-Bring-your-own-Data```
 - **Erforderliche Python-Pakete installieren:** Installiere die benötigten Python-Pakete, indem du im Terminal den Befehl ```pip install -r requirements.txt``` ausführst.
-- **Code-Skelett vervollständigen:** Fülle das vorgegebene Code-Skelett in der Datei _app.py_ aus. Alle dazu benötigten Informationen kannst du im ersten Kapitel des Cheatsheet finden oder auch die [Dokumentation von Chainlit](https://docs.chainlit.io) nutzen, falls du etwas genauer nachlesen möchtest.
+- **Code-Skelett vervollständigen:** Fülle das vorgegebene Code-Skelett in der Datei _app.py_ aus. Alle dazu benötigten Informationen kannst du im ersten Kapitel (bes. den Abschnitten _Get started_ und _AzureChatOpenAI_) des Leitfadens finden oder auch die [Dokumentation von Chainlit](https://docs.chainlit.io) nutzen, falls du etwas genauer nachlesen möchtest.
 - **App starten:** Starte das Skript der App, indem du
   - den Terminal deines Betriebssystems öffnest,
   - in den Ordner _sprint_1/src_ wechselst,
