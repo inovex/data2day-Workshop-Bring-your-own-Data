@@ -13,8 +13,14 @@ from langchain_openai import AzureOpenAIEmbeddings
 
 def load_texts(file_type):
     if file_type == "txt":
-        # load text files and remove "pass"
-        pass
+        # loads text files
+        loader = DirectoryLoader(
+            "data",
+            glob="**/*.txt",
+            show_progress=True,
+            loader_cls=TextLoader,
+        )
+        docs = loader.load()
 
     elif file_type == "md":
         # loads markdown files
@@ -26,13 +32,23 @@ def load_texts(file_type):
         docs = loader.load()
 
     elif file_type == "pdf":
-        # load pdf files and remove pass
-        pass
+        # loads pdf files
+        loader = DirectoryLoader(
+            "data",
+            glob="**/*.pdf",
+            show_progress=True,
+            loader_cls=PyPDFLoader,
+        )
+        docs = loader.load()
 
     # create a text splitter object
+    text_splitter = CharacterTextSplitter(
+        chunk_size=500,
+        chunk_overlap=20
+    )
 
-    # chunk texts
-    text_chunks = None
+    # split texts
+    text_chunks = text_splitter.split_documents(docs)
 
     return text_chunks
 

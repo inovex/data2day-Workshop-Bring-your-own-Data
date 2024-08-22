@@ -78,15 +78,6 @@ async def on_chat_start():
         \n\n
         {context}"""
 
-    # prompt template with system prompt + placeholder for chat history
-    prompt = ChatPromptTemplate.from_messages(
-        [
-            ("system", system_prompt),
-            MessagesPlaceholder("chat_history"),
-            ("human", "{input}"),
-        ]
-    )
-
     # create a prompt template with the system prompt
     prompt = ChatPromptTemplate.from_messages(
         [

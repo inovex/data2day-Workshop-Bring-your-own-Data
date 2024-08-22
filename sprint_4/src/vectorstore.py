@@ -13,14 +13,8 @@ from langchain_openai import AzureOpenAIEmbeddings
 
 def load_texts(file_type):
     if file_type == "txt":
-        # loads text files
-        loader = DirectoryLoader(
-            "data",
-            glob="**/*.txt",
-            show_progress=True,
-            loader_cls=TextLoader,
-        )
-        docs = loader.load()
+        # load text files and remove "pass"
+        pass
 
     elif file_type == "md":
         # loads markdown files
@@ -32,24 +26,13 @@ def load_texts(file_type):
         docs = loader.load()
 
     elif file_type == "pdf":
-        # loads pdf files
-        loader = DirectoryLoader(
-            "data",
-            glob="**/*.pdf",
-            show_progress=True,
-            loader_cls=PyPDFLoader,
-        )
-        docs = loader.load()
+        # load pdf files and remove pass
+        pass
 
-    # create chunks
-    text_splitter = CharacterTextSplitter(
-        chunk_size=500,
-        chunk_overlap=20,
-        length_function=len,
-        is_separator_regex=False,
-    )
+    # create a text splitter object
 
-    text_chunks = text_splitter.split_documents(docs)
+    # split texts
+    text_chunks = None
 
     return text_chunks
 
@@ -84,6 +67,7 @@ async def create_vectorstore(
         )
     else:
         chunked_docs = load_texts(file_type)
+
         # create vector store
         vectorstore = Chroma.from_documents(
             documents=chunked_docs,

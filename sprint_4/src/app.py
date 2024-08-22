@@ -1,3 +1,4 @@
+import os
 import chainlit as cl
 import phoenix as px
 from langchain.chains import create_retrieval_chain
@@ -23,10 +24,10 @@ async def on_chat_start():
 
     # initialize the Azure OpenAI Model
     model = AzureChatOpenAI(
-        azure_endpoint="insert your endpoint here",
-        deployment_name="insert your deployment name here",
-        api_key="insert your api key here",
-        api_version="insert your api version here",
+        azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+        deployment_name=os.getenv("AZURE_OPENAI_DEPLOYMENT"),
+        api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+        api_version=os.getenv("AZURE_OPENAI_VERSION"),
         openai_api_type="azure",
         temperature=0.0,
         streaming=True,
@@ -34,10 +35,10 @@ async def on_chat_start():
 
     # creates vectorstore if it does not exist already and load data
     vectorstore = await create_vectorstore(
-        api_version="insert your api version here",
-        api_key="insert your api key here",
-        azure_endpoint="insert your endpoint here",
-        embeddings_deployment="insert your embedding deployment name here",
+        api_version=os.getenv("AZURE_OPENAI_VERSION"),
+        api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+        azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+        embeddings_deployment=os.getenv("AZURE_OPENAI_EMBEDDING_DEPLOYMENT"),
         file_type="pdf",
     )
 
