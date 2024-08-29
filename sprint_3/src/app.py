@@ -1,15 +1,21 @@
+import os
+from dotenv import load_dotenv
+
 import chainlit as cl
 import phoenix as px
 from langchain.chains import create_retrieval_chain
 
 # add imports
 from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain.chains.history_aware_retriever import create_history_aware_retriever
 from langchain.schema.runnable.config import RunnableConfig
-from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.messages import HumanMessage, AIMessage
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_openai import AzureChatOpenAI
 from phoenix.trace.langchain import LangChainInstrumentor
 from vectorstore import create_vectorstore
 
+load_dotenv("../../.env")
 
 @cl.on_chat_start
 async def on_chat_start():
@@ -19,10 +25,10 @@ async def on_chat_start():
 
     # initialize the Azure OpenAI Model
     model = AzureChatOpenAI(
-        azure_endpoint="insert your endpoint here",
-        deployment_name="insert your deployment name here",
-        api_key="insert your api key here",
-        api_version="insert your api version here",
+        azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+        deployment_name=os.getenv("AZURE_OPENAI_DEPLOYMENT"),
+        api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+        api_version=os.getenv("AZURE_OPENAI_VERSION"),
         openai_api_type="azure",
         temperature=0.0,
         streaming=True,
@@ -30,10 +36,10 @@ async def on_chat_start():
 
     # creates vectorstore if it does not exist already and load data
     vectorstore = await create_vectorstore(
-        api_version="insert your api version here",
-        api_key="insert your api key here",
-        azure_endpoint="insert your endpoint here",
-        embeddings_deployment="insert your embedding deployment name here",
+        api_version=os.getenv("AZURE_OPENAI_VERSION"),
+        api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+        azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+        embeddings_deployment=os.getenv("AZURE_OPENAI_EMBEDDING_DEPLOYMENT"),
     )
 
     # initialize a retriever from the vectorstore

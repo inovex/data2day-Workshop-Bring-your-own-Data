@@ -1,3 +1,6 @@
+import os
+from dotenv import load_dotenv
+
 import chainlit as cl
 from langchain.chains import create_retrieval_chain
 
@@ -9,23 +12,25 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import AzureChatOpenAI
 from vectorstore import create_vectorstore
 
+load_dotenv("../../.env")
 
 @cl.on_chat_start
 async def on_chat_start():
-    # initialize a vectorstore
-
-    # initialize a retriever from the vectorstore
-
     # initialize the Azure OpenAI Model
     model = AzureChatOpenAI(
-        azure_endpoint="insert your endpoint here",
-        deployment_name="insert your deployment name here",
-        api_key="insert your api key here",
-        api_version="insert your api version here",
+        azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+        deployment_name=os.getenv("AZURE_OPENAI_DEPLOYMENT"),
+        api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+        api_version=os.getenv("AZURE_OPENAI_VERSION"),
         openai_api_type="azure",
         temperature=0.0,
         streaming=True,
     )
+    # initialize a vectorstore
+
+    # initialize a retriever from the vectorstore
+
+
 
     # crate a system prompt that tells the LLM to answer questions based on the given context
     # and use a variable that represents the context

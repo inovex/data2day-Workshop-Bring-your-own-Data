@@ -1,4 +1,6 @@
 import os
+from dotenv import load_dotenv
+
 import chainlit as cl
 import phoenix as px
 from langchain.chains import create_retrieval_chain
@@ -13,12 +15,12 @@ from langchain_openai import AzureChatOpenAI
 from phoenix.trace.langchain import LangChainInstrumentor
 from vectorstore import create_vectorstore
 
+load_dotenv("../../.env")
 
 @cl.on_chat_start
 async def on_chat_start():
     # start a phoenix session
     session = px.launch_app()
-
     # initialize Langchain auto-instrumentation
     LangChainInstrumentor().instrument()
 
@@ -39,7 +41,7 @@ async def on_chat_start():
         api_key=os.getenv("AZURE_OPENAI_API_KEY"),
         azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
         embeddings_deployment=os.getenv("AZURE_OPENAI_EMBEDDING_DEPLOYMENT"),
-        file_type="pdf",
+        # file_type="pdf",
     )
 
     # # initialize a retriever from the vectorstore

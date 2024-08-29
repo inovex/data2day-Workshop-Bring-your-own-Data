@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 
 import chainlit as cl
 from dotenv import load_dotenv
@@ -7,8 +8,7 @@ from langchain.schema import StrOutputParser
 from langchain.schema.runnable.config import RunnableConfig
 from langchain_openai import AzureChatOpenAI
 
-load_dotenv()
-
+load_dotenv("../../.env")
 
 @cl.on_settings_update
 async def setup_chain(chat_settings):

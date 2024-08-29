@@ -1,14 +1,13 @@
 import os
+from dotenv import load_dotenv
 
 import chainlit as cl
-from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema import StrOutputParser
 from langchain.schema.runnable.config import RunnableConfig
 from langchain_openai import AzureChatOpenAI
 
-load_dotenv()
-
+load_dotenv("../../.env")
 
 @cl.on_chat_start
 async def on_chat_start():

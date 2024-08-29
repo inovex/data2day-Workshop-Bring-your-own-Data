@@ -12,3 +12,5 @@ langchain-text-splitters==0.2.2
 python-dotenv==1.0.1
 ragas==0.1.13
 Requests==2.32.3
+unstructured==0.15.7
+Markdown==3.7

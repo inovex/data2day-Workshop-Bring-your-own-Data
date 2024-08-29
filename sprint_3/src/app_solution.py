@@ -1,8 +1,8 @@
 import os
+from dotenv import load_dotenv
 
 import chainlit as cl
 import phoenix as px
-from dotenv import load_dotenv
 from langchain.chains import create_retrieval_chain
 
 # add imports
@@ -15,7 +15,7 @@ from langchain_openai import AzureChatOpenAI
 from phoenix.trace.langchain import LangChainInstrumentor
 from vectorstore import create_vectorstore
 
-load_dotenv()
+load_dotenv("../../.env")
 
 
 @cl.on_chat_start
@@ -77,6 +77,15 @@ async def on_chat_start():
         answer concise.
         \n\n
         {context}"""
+
+    # prompt template with system prompt + placeholder for chat history
+    prompt = ChatPromptTemplate.from_messages(
+        [
+            ("system", system_prompt),
+            MessagesPlaceholder("chat_history"),
+            ("human", "{input}"),
+        ]
+    )
 
     # create a prompt template with the system prompt
     prompt = ChatPromptTemplate.from_messages(

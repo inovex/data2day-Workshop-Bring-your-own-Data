@@ -11,9 +11,9 @@ from langchain_core.messages import AIMessage, HumanMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_openai import AzureChatOpenAI
 
-from vectorstore import create_vectorstore
+from vectorstore_solution import create_vectorstore
 
-load_dotenv()
+load_dotenv("../../.env")
 
 
 @cl.on_chat_start

@@ -13,3 +13,6 @@ __pycache__/
 
 # Mac DS_Store 
 .DS_Store
+
+# sprint 4 chroma db
+sprint_4/chroma_db

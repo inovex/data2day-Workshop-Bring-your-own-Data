@@ -1,21 +1,23 @@
-import os
-
 # add imports
+
+import os
 from langchain_chroma import Chroma
-from langchain_community.document_loaders import DirectoryLoader
+from langchain_community.document_loaders import DirectoryLoader, UnstructuredMarkdownLoader
 from langchain_openai import AzureOpenAIEmbeddings
 
+#set loaded to False on app start
+globals()["loaded"] = False
 
 def load_texts():
     # loads markdown files
-    loader = DirectoryLoader("data", glob="**/*.md", show_progress=True)
+    loader = DirectoryLoader(
+        "data", glob="**/*.md",
+        show_progress=True,
+        loader_cls=UnstructuredMarkdownLoader
+    )
     docs = loader.load()
 
-    # extract tests/content from markdown files and collect them in a list
-    all_texts = []
-    for doc in docs:
-        all_texts.append(doc.page_content)
-    return all_texts
+    return docs
 
 
 async def create_vectorstore(
@@ -28,13 +30,25 @@ async def create_vectorstore(
     Chroma: An instance of the Chroma class with the created vectorstore.
     """
     # initialize the Embedding Model
+    embeddings = ...
 
-    # check if vectorstore already exists
-    if os.path.isdir("./chroma_db"):
-        # load vectorstore and remove "pass"
-        pass
-    else:
-        all_texts = load_texts()
-        # create vector store
+    vectorstore = Chroma(
+        embedding_function=embeddings, persist_directory="./chroma_db"
+    )
+    #make sure it only runs once
+    if globals()["loaded"] is False:
+        # delete all contents of vectorstore
+        vectorstore.reset_collection()
 
-    # return vectorstore object
+        print("Loading files...")
+        all_docs = load_texts()
+
+        # add them to the store
+        print("Adding files with embeddings to vectorstore...")
+        vectorstore.#...
+
+        print("Success")
+
+        globals()["loaded"] = True
+
+    return vectorstore
